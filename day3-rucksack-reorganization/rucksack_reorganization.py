@@ -15,7 +15,9 @@ uppercase_items = list(string.ascii_uppercase)
 all_items = lowercase_items + uppercase_items
 priorities = list(range(1, 52 + 1))
 items_dict = dict(zip(all_items, priorities))
-
+'''
+Part One
+'''
 sum_of_priorities = 0
 total_items = 0
 
@@ -30,7 +32,9 @@ for rucksack in rucksacks:
     sum_of_priorities += item_priority
 
 print(sum_of_priorities)
-'''Part Two'''
+'''
+Part Two
+'''
 number_of_rucksacks = len(rucksacks)
 group_size = 3
 groups_of_elves = [
