@@ -23,12 +23,9 @@ total_items = 0
 
 for rucksack in rucksacks:
     total_items = len(rucksack) // 2
-    rucksack_1 = rucksack[:total_items]
-    rucksack_2 = rucksack[total_items:]
-
-    for letter in rucksack_1:
-        if letter in rucksack_2:
-            item_priority = items_dict.get(letter)
+    rucksack_1 = set(rucksack[:total_items])
+    rucksack_2 = set(rucksack[total_items:])
+    item_priority = items_dict.get(list(rucksack_1 & rucksack_2)[0])
     sum_of_priorities += item_priority
 
 print(sum_of_priorities)
@@ -43,13 +40,10 @@ groups_of_elves = [
 ]
 sum_of_priorities_2 = 0
 for group in groups_of_elves:
-    sack_1, sack_2, sack_3 = list(group[0]), list(group[1]), list(group[2])
-    sack_1_unique, sack_2_unique, sack_3_unique = list(
-        dict.fromkeys(sack_1)), list(dict.fromkeys(sack_2)), list(
-            dict.fromkeys(sack_3))
-    for letter in sack_1_unique:
-        if (letter in sack_2_unique) and (letter in sack_3_unique):
-            badge_priority = items_dict.get(letter)
+    intersection = set(group[0])
+    for sack in group[1:]:
+        intersection &= set(sack)
+    badge_priority = items_dict.get(intersection.pop())
     sum_of_priorities_2 += badge_priority
 
 print(sum_of_priorities_2)
