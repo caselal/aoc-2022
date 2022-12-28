@@ -1,7 +1,9 @@
 """
 Advent of Code - Day 7: No Space Left on Device
 """
-
+############
+# Part One
+############
 with open('input.txt', 'r') as file:
     terminal_output = file.read()
 
@@ -42,3 +44,22 @@ for value in device.values():
         sum_of_directories += value
 
 print("total sum:", sum_of_directories)
+
+############
+# Part Two
+############
+device_size = device.get('/')
+unused_space = 70000000 - device.get('/')
+space_needed = 30000000
+difference = space_needed - unused_space
+
+directory_options = {}
+for key, value in device.items():
+    if value >= difference:
+        directory_options[key] = value
+
+smallest_directory_to_remove = min(directory_options,
+                                   key=directory_options.get)
+
+print("directory to remove:", smallest_directory_to_remove)
+print("directory size:", directory_options.get(smallest_directory_to_remove))
