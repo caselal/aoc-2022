@@ -30,3 +30,29 @@ for i, row in enumerate(tree_map[1:-1]):
 
 visible_trees_count = total_trees - hidden_trees_count
 print(visible_trees_count)
+
+############
+# Part Two
+############
+scenic_score = 0
+max_score = 0
+
+for i, row in enumerate(tree_map[1:-1]):
+    for j, tree in enumerate(row[1:-1]):
+        tree_lines = [
+            tree_array[i + 1, :j + 1][::-1], tree_array[i + 1, j + 2:],
+            tree_array[:i + 1, j + 1][::-1], tree_array[i + 2:, j + 1]
+        ]
+
+        scenic_score = 1
+
+        for tree_line in tree_lines:
+            count = 0
+            for t in tree_line:
+                count += 1
+                if t >= tree:
+                    break
+            scenic_score *= count
+        max_score = max(max_score, scenic_score)
+
+print(max_score)
