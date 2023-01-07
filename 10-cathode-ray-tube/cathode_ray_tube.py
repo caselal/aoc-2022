@@ -19,13 +19,9 @@ for line in program:
     register.append(X)
 
     if line == 'noop':
-        instruction = line
         V.append(0)
     else:
-        instruction = line.split(sep=' ')[0]
         V.append(int(line.split(sep=' ')[1]))
-
-    if instruction == 'addx':
         register.append(X)
         X += V[cycle]
 
@@ -41,3 +37,19 @@ print(sum_signal_strengths)
 ###########
 # Part Two
 ###########
+screen = ''
+screen_width = 40
+screen_height = 6
+for row in range(screen_height):
+    for i in range(screen_width):
+        sprite_position = range(register[row * screen_width + i] - 1,
+                                register[row * screen_width + i] + 2)
+
+        if i in sprite_position:
+            pixel = '#'
+        else:
+            pixel = '.'
+        screen = ''.join([screen, pixel])
+
+for row in range(screen_height):
+    print(screen[row * screen_width:(row + 1) * screen_width])
